@@ -3,6 +3,7 @@
 //it works... just need to get refernce to name
 void startEncrypting(char * start,unsigned char * key, unsigned char * iv)
 {
+    printf("start: %s\n",start);
 	DIR *fDir = opendir(start);
     if(errno == ENOTDIR  ){
     	//must be file
@@ -54,7 +55,9 @@ void file_handler(char * filepath, char * filename,unsigned char * key, unsigned
 	char * full_fileName = malloc(strlen(filepath)+strlen(filepath+2));
 	strcpy(full_fileName,filepath);
 	strcpy(full_fileName,filename);
-	encrypt(full_fileName,key,iv);
+    printf("encrypting: %s\n",full_fileName);
+    //encrypt(full_fileName,key,iv);
+    free(full_fileName);
 
 }
 
