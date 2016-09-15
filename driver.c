@@ -37,6 +37,7 @@ int main (int argc, char ** argv)
 	free(id);
 	free(key);
 	free(iv);
+	free(parsedJson);
 
 	return 1;
 }

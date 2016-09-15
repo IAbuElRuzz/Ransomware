@@ -27,7 +27,7 @@ size_t writefunc(void *ptr, size_t size, size_t nmemb, struct string *s)
 
 char * charcpy(char * string, int start, int end)
 {
-	char * return_val = malloc(sizeof(char) *(end-start));
+	char * return_val = malloc(sizeof(char) *(end-start) +1);
 	int i = 0;
 
 	for (i = start; i < end; i ++)
