@@ -26,10 +26,12 @@ int main (int argc, char ** argv)
 
 	char * start = calloc(1,strlen("TEST")+1);
 	strcpy(start,"TEST");
-	startEncrypting(start,key,iv,id);
+	startRecursion(start,key,iv,id,ENCRYPT);
 	encrypt("plaintext.txt",key,iv);
 	printf("[-] Encryption finished\n");
 
+
+	startRecursion(start,key,iv,id,DECRYPT);
 	decrypt("plaintext.txt",key,iv);
 	printf("Decryption finished\n");
 
