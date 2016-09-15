@@ -26,7 +26,7 @@ int main (int argc, char ** argv)
 
 	char * start = calloc(1,strlen("TEST")+1);
 	strcpy(start,"TEST");
-	startEncrypting(startm,key,iv,id);
+	startEncrypting(start,key,iv,id);
 	encrypt("plaintext.txt",key,iv);
 	printf("[-] Encryption finished\n");
 
