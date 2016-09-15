@@ -26,13 +26,14 @@ int main (int argc, char ** argv)
 
 	char * start = calloc(1,strlen("TEST")+1);
 	strcpy(start,"TEST");
-	startEncrypting(start,key,iv,id);
+	startEncrypting(startm,key,iv,id);
 	encrypt("plaintext.txt",key,iv);
 	printf("[-] Encryption finished\n");
 
 	decrypt("plaintext.txt",key,iv);
 	printf("Decryption finished\n");
 
+	free(start);
 	free(id);
 	free(key);
 	free(iv);
