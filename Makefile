@@ -10,7 +10,8 @@ all:
 	$(CC) -c curlHelper.c -lcmurl
 
 
-	$(CC) $(CFLAGS) driver driver.c $(OBJECTS) -lcrypto -lcurl
+	$(CC) $(CFLAGS) encrypt encryptDriver.c $(OBJECTS) -lcrypto -lcurl
+	$(CC) $(CFLAGS) decrypt decryptDriver.c $(OBJECTS) -lcrypto -lcurl
 
 
 clean:

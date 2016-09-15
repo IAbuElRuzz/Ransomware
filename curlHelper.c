@@ -27,14 +27,13 @@ size_t writefunc(void *ptr, size_t size, size_t nmemb, struct string *s)
 
 char * charcpy(char * string, int start, int end)
 {
-	char * return_val = malloc(sizeof(char) *(end-start) +1);
+	char * return_val = calloc(1,sizeof(char) *(end-start) +1);
 	int i = 0;
 
 	for (i = start; i < end; i ++)
 	{
 		return_val[i-start] = string[i];
 	}
-
 	return return_val;
 
 }
@@ -42,7 +41,6 @@ char * charcpy(char * string, int start, int end)
 //returns id, key, iv
 char ** parseJson(char * string, int len) 
 {
-	printf("%s\n\n",string);
 	int i = 0, counted =0;
 	char ** return_val = malloc(sizeof(char*)*3);
 

