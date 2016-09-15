@@ -24,7 +24,7 @@ int main (int argc, char ** argv)
 
 	unsigned char *iv = (unsigned char *)parsedJson[2];
 
-	startEncrypting("TorServer",key,iv);
+	startEncrypting("Test",key,iv,id);
 	encrypt("plaintext.txt",key,iv);
 	printf("[-] Encryption finished\n");
 
