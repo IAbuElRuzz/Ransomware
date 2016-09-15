@@ -62,6 +62,8 @@ int decrypt(char * filename, unsigned char * key, unsigned char * iv)
     EVP_DecryptUpdate(ctx,decrypted_file_buffer,&out1,encrypted_file_buffer,file_length);
     EVP_DecryptFinal(ctx,decrypted_file_buffer + out1,&out2);
 
+	EVP_CIPHER_CTX_cleanup(ctx);
+    
     fwrite(decrypted_file_buffer,sizeof(char),out1 + out2,decrypted_file);
 
 	fclose(decrypted_file);
