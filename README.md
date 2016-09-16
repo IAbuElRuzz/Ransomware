@@ -1,7 +1,8 @@
-### RANSOMWARE
+# RANSOMWARE
 	
 ## Summary
-	- This is ransomware implemented in C with a corresponding C&amp;C created with Java Spring Boot. This ransomware is purely for educational purposes. Use of this program may be illegal in some countries. This software is currently not finished. It will encrypt and decrypt, but I cannot guarentee that my test server will hold or keep any keys/ids. Do not run without risking permanently encrypting your disk's content.
+- 
+	This is ransomware implemented in C with a corresponding C&amp;C created with Java Spring Boot. This ransomware is purely for educational purposes. Use of this program may be illegal in some countries. This software is currently not finished. It will encrypt and decrypt, but I cannot guarentee that my test server will hold or keep any keys/ids. Do not run without risking permanently encrypting your disk's content.
 
 
 ## WARNING 
